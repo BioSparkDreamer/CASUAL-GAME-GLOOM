@@ -4,13 +4,24 @@ using UnityEngine;
 
 public class PlayerHealthController : MonoBehaviour
 {
+    public static PlayerHealthController instance;
+
     [Header("Health Variables")]
     public int maxHealth;
-    private int currentHealth;
+    public int currentHealth;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        currentHealth = maxHealth;
+    }
 
     void Start()
     {
-        currentHealth = maxHealth;
+
     }
 
     void Update()
@@ -27,6 +38,8 @@ public class PlayerHealthController : MonoBehaviour
             currentHealth = 0;
             UIController.instance.ShowGameOver();
         }
+
+        UIController.instance.UpdateHealthUI();
     }
 
     public void AddHealth(int healthToAdd)
@@ -37,5 +50,7 @@ public class PlayerHealthController : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
+
+        UIController.instance.UpdateHealthUI();
     }
 }

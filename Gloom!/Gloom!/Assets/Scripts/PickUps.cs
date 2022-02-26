@@ -8,6 +8,10 @@ public class PickUps : MonoBehaviour
     public int ammoAmmount = 25;
     public bool isAmmo;
 
+    [Header("Health Pickup Variables")]
+    public int healthAmount = 20;
+    public bool isHealth;
+
     void Start()
     {
 
@@ -25,6 +29,14 @@ public class PickUps : MonoBehaviour
             if (isAmmo)
             {
                 PlayerController.instance.currentAmmo += ammoAmmount;
+                UIController.instance.UpdateAmmoUI();
+                Destroy(gameObject);
+            }
+
+            if (isHealth && PlayerHealthController.instance.currentHealth < PlayerHealthController.instance.maxHealth)
+            {
+                PlayerHealthController.instance.AddHealth(healthAmount);
+                UIController.instance.UpdateHealthUI();
                 Destroy(gameObject);
             }
         }

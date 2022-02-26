@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIController : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class UIController : MonoBehaviour
     public GameObject gameOverScreen;
     public bool isDead;
 
+    [Header("HUD Variables")]
+    public TMP_Text healthText;
+    public TMP_Text ammoText;
+
     void Awake()
     {
         if (instance == null)
@@ -27,6 +32,8 @@ public class UIController : MonoBehaviour
     void Start()
     {
         FadeFromBlack();
+        UpdateAmmoUI();
+        UpdateHealthUI();
     }
 
     void Update()
@@ -52,6 +59,15 @@ public class UIController : MonoBehaviour
                 fadeFromBlack = false;
             }
         }
+    }
+
+    public void UpdateHealthUI()
+    {
+        healthText.text = PlayerHealthController.instance.currentHealth.ToString() + "%";
+    }
+    public void UpdateAmmoUI()
+    {
+        ammoText.text = PlayerController.instance.currentAmmo.ToString();
     }
 
     public void ShowGameOver()

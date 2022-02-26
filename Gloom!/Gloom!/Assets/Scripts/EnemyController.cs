@@ -13,6 +13,13 @@ public class EnemyController : MonoBehaviour
     public bool shouldChase;
     public float moveSpeed;
 
+    [Header("Shooting Variables")]
+    public float fireRate = .5f;
+    private float shotCounter;
+    public bool shouldShoot;
+    public GameObject bullet;
+    public Transform firePoint;
+
     void Start()
     {
 
@@ -24,7 +31,18 @@ public class EnemyController : MonoBehaviour
         {
             Vector3 playerDirection = PlayerController.instance.transform.position - transform.position;
             theRB.velocity = playerDirection.normalized * moveSpeed;
+
+            if (shouldShoot)
+            {
+                shotCounter -= Time.deltaTime;
+                if (shotCounter <= 0)
+                {
+                    Instantiate(bullet, firePoint.position, firePoint.rotation);
+                    shotCounter = fireRate;
+                }
+            }
         }
+
         else
         {
             theRB.velocity = Vector2.zero;

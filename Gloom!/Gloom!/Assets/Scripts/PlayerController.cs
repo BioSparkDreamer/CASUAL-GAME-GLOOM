@@ -112,6 +112,7 @@ public class PlayerController : MonoBehaviour
                 nextTimeCounter = nextTimeToFire;
                 shotGunAnim.SetTrigger("Shoot");
                 currentAmmo--;
+                UIController.instance.UpdateAmmoUI();
             }
         }
 
