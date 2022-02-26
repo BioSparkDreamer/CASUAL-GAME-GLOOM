@@ -22,6 +22,15 @@ public class PlayerController : MonoBehaviour
     public int currentAmmo;
     public float nextTimeToFire;
     private float nextTimeCounter;
+    public Animator shotGunAnim;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
 
     void Start()
     {
@@ -73,20 +82,25 @@ public class PlayerController : MonoBehaviour
     {
         if ((Input.GetButton("Shoot") || Input.GetAxis("ShootingTrigger") > 0.5) && nextTimeCounter <= 0)
         {
-            Ray ray = camTrans.ViewportPointToRay(new Vector3(.5f, .5f, 0f));
-
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit))
+            if (currentAmmo > 0)
             {
-                Instantiate(bulletEffect, hit.point, Quaternion.identity);
-            }
-            else
-            {
-                Debug.Log("I am not looking at anything");
-            }
+                Ray ray = camTrans.ViewportPointToRay(new Vector3(.5f, .5f, 0f));
 
-            nextTimeCounter = nextTimeToFire;
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit))
+                {
+                    Instantiate(bulletEffect, hit.point, Quaternion.identity);
+                }
+                else
+                {
+                    Debug.Log("I am not looking at anything");
+                }
+
+                nextTimeCounter = nextTimeToFire;
+                shotGunAnim.SetTrigger("Shoot");
+                currentAmmo--;
+            }
         }
 
         if (nextTimeCounter > 0)

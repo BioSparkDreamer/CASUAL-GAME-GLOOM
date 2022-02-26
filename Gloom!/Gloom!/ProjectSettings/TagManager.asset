@@ -41,6 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Pickups
+    uniqueID: 222061975
+    locked: 0
   - name: Bullet Impact
     uniqueID: 2973657167
     locked: 0
