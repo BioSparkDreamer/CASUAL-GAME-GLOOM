@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [Header("Shooting Variables")]
     public GameObject bulletEffect;
     public int currentAmmo;
+    public int gunDamage;
     public float nextTimeToFire;
     private float nextTimeCounter;
     public Animator shotGunAnim;
@@ -39,18 +40,24 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Movement();
+        if (!UIController.instance.isDead)
+        {
+            Movement();
 
-        MouseMovement();
+            MouseMovement();
 
-        CameraMovement();
+            CameraMovement();
 
-        Shooting();
+            Shooting();
+        }
     }
 
     void FixedUpdate()
     {
-        theRB.velocity = (moveHorizontal + moveVertical) * moveSpeed;
+        if (!UIController.instance.isDead)
+        {
+            theRB.velocity = (moveHorizontal + moveVertical) * moveSpeed;
+        }
     }
 
     void Movement()
@@ -91,6 +98,11 @@ public class PlayerController : MonoBehaviour
                 if (Physics.Raycast(ray, out hit))
                 {
                     Instantiate(bulletEffect, hit.point, Quaternion.identity);
+
+                    if (hit.transform.tag == "Enemy")
+                    {
+                        hit.transform.parent.GetComponent<EnemyHealthController>().TakeDamage(gunDamage);
+                    }
                 }
                 else
                 {

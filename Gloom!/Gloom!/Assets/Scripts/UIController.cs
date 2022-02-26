@@ -5,10 +5,24 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    public static UIController instance;
+
     [Header("Fade Screen Variables")]
     public Image fadeScreen;
     public float fadeSpeed;
     public bool fadeFromBlack, fadeToBlack;
+
+    [Header("Game Over Screen Variables")]
+    public GameObject gameOverScreen;
+    public bool isDead;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
 
     void Start()
     {
@@ -38,6 +52,12 @@ public class UIController : MonoBehaviour
                 fadeFromBlack = false;
             }
         }
+    }
+
+    public void ShowGameOver()
+    {
+        gameOverScreen.SetActive(true);
+        isDead = true;
     }
 
     public void FadeFromBlack()
