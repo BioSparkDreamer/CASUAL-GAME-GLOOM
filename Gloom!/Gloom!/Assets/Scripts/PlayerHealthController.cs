@@ -10,6 +10,10 @@ public class PlayerHealthController : MonoBehaviour
     public int maxHealth;
     public int currentHealth;
 
+    [Header("Armor")]
+    public int currentArmor;
+    public int maxArmor;
+
     void Awake()
     {
         if (instance == null)
@@ -17,6 +21,7 @@ public class PlayerHealthController : MonoBehaviour
             instance = this;
         }
         currentHealth = maxHealth;
+        currentArmor = (maxArmor / 2);
     }
 
     void Start()
@@ -31,16 +36,31 @@ public class PlayerHealthController : MonoBehaviour
 
     public void TakeDamage(int damageToDeal)
     {
-        currentHealth -= damageToDeal;
-        AudioManager.instance.PlaySFXAdjusted(5);
-
-        if (currentHealth <= 0)
+        if (currentArmor <= 0)
         {
-            currentHealth = 0;
-            UIController.instance.ShowGameOver();
-        }
+            currentHealth -= damageToDeal;
+            AudioManager.instance.PlaySFXAdjusted(5);
 
-        UIController.instance.UpdateHealthUI();
+            if (currentHealth <= 0)
+            {
+                currentHealth = 0;
+                GameOverMenu.instance.OpenGameOverScreen();
+            }
+
+            UIController.instance.UpdateHealthUI();
+        }
+        else if (currentArmor >= 0)
+        {
+            currentArmor -= damageToDeal * 2;
+            AudioManager.instance.PlaySFXAdjusted(5);
+
+            if (currentArmor < 0)
+            {
+                currentArmor = 0;
+            }
+
+            UIController.instance.UpdateArmorUI();
+        }
     }
 
     public void AddHealth(int healthToAdd)
@@ -53,5 +73,17 @@ public class PlayerHealthController : MonoBehaviour
         }
 
         UIController.instance.UpdateHealthUI();
+    }
+
+    public void AddArmor(int armorToAdd)
+    {
+        currentArmor += armorToAdd;
+
+        if (currentArmor >= maxArmor)
+        {
+            currentArmor = maxArmor;
+        }
+
+        UIController.instance.UpdateArmorUI();
     }
 }

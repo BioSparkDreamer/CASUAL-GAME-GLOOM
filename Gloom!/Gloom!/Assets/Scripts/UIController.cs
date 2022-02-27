@@ -13,13 +13,10 @@ public class UIController : MonoBehaviour
     public float fadeSpeed;
     public bool fadeFromBlack, fadeToBlack;
 
-    [Header("Game Over Screen Variables")]
-    public GameObject gameOverScreen;
-    public bool isDead;
-
     [Header("HUD Variables")]
     public TMP_Text healthText;
     public TMP_Text ammoText;
+    public TMP_Text armorText;
 
     void Awake()
     {
@@ -34,6 +31,7 @@ public class UIController : MonoBehaviour
         FadeFromBlack();
         UpdateAmmoUI();
         UpdateHealthUI();
+        UpdateArmorUI();
     }
 
     void Update()
@@ -70,10 +68,9 @@ public class UIController : MonoBehaviour
         ammoText.text = PlayerController.instance.currentAmmo.ToString();
     }
 
-    public void ShowGameOver()
+    public void UpdateArmorUI()
     {
-        gameOverScreen.SetActive(true);
-        isDead = true;
+        armorText.text = PlayerHealthController.instance.currentArmor.ToString() + "%";
     }
 
     public void FadeFromBlack()

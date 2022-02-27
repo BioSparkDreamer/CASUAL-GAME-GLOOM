@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public int gunDamage;
     public float nextTimeToFire;
     private float nextTimeCounter;
-    public Animator shotGunAnim;
+    //public Animator shotGunAnim;
 
     void Awake()
     {
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!UIController.instance.isDead)
+        if (!GameOverMenu.instance.isDead && !PauseMenu.instance.isPaused)
         {
             Movement();
 
@@ -54,10 +54,16 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!UIController.instance.isDead)
+        if (!GameOverMenu.instance.isDead && !PauseMenu.instance.isPaused)
         {
             theRB.velocity = (moveHorizontal + moveVertical) * moveSpeed;
         }
+    }
+
+    void LateUpdate()
+    {
+        camTrans.transform.localRotation = Quaternion.Euler(rotationAmount.x, Mathf.Clamp(rotationAmount.y, minAngle, maxAngle),
+        rotationAmount.z);
     }
 
     void Movement()
@@ -80,9 +86,6 @@ public class PlayerController : MonoBehaviour
     void CameraMovement()
     {
         rotationAmount = camTrans.transform.localRotation.eulerAngles + new Vector3(0f, mouseInput.y, 0f);
-
-        camTrans.transform.localRotation = Quaternion.Euler(rotationAmount.x, Mathf.Clamp(rotationAmount.y, minAngle, maxAngle),
-        rotationAmount.z);
     }
 
     void Shooting()
@@ -110,7 +113,7 @@ public class PlayerController : MonoBehaviour
                 }
 
                 nextTimeCounter = nextTimeToFire;
-                shotGunAnim.SetTrigger("Shoot");
+                //shotGunAnim.SetTrigger("Shoot");
                 AudioManager.instance.PlaySFXAdjusted(3);
                 currentAmmo--;
                 UIController.instance.UpdateAmmoUI();

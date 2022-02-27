@@ -143,7 +143,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ea73266848884414e9f9cff1b0fb6378, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b1525adff779785449c3abc20388dded, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -151,7 +151,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &7635160281927725460
@@ -212,11 +212,11 @@ PrefabInstance:
     - target: {fileID: -1504981713932161579, guid: 06386c6e2c76a424cade2af9cc6ec392, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c204ff1a99d530c46ae3b8db2f617657, type: 2}
+      objectReference: {fileID: 2100000, guid: b9cd059ef22b69244bc2ff33a49865ef, type: 2}
     - target: {fileID: -1504981713932161579, guid: 06386c6e2c76a424cade2af9cc6ec392, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: f2a8773d89e872141888cf87bcadec9e, type: 2}
+      objectReference: {fileID: 2100000, guid: b9cd059ef22b69244bc2ff33a49865ef, type: 2}
     - target: {fileID: -927199367670048503, guid: 06386c6e2c76a424cade2af9cc6ec392, type: 3}
       propertyPath: m_Name
       value: 4 Side Cube
