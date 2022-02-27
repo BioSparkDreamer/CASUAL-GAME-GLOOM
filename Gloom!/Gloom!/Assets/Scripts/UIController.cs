@@ -18,6 +18,15 @@ public class UIController : MonoBehaviour
     public TMP_Text ammoText;
     public TMP_Text armorText;
 
+    [Header("Hurt Screen Variables")]
+    public float hurtScreenLength;
+    private float hurtCounter;
+    public GameObject hurtScreen;
+
+    [Header("Key Variables")]
+    public bool hasBlueKey;
+    public Image blueKeyCard;
+
     void Awake()
     {
         if (instance == null)
@@ -57,6 +66,16 @@ public class UIController : MonoBehaviour
                 fadeFromBlack = false;
             }
         }
+
+        if (hurtCounter > 0)
+        {
+            hurtCounter -= Time.deltaTime;
+            hurtScreen.SetActive(true);
+        }
+        else
+        {
+            hurtScreen.SetActive(false);
+        }
     }
 
     public void UpdateHealthUI()
@@ -71,6 +90,17 @@ public class UIController : MonoBehaviour
     public void UpdateArmorUI()
     {
         armorText.text = PlayerHealthController.instance.currentArmor.ToString() + "%";
+    }
+
+    public void EnableHurtScreen()
+    {
+        hurtCounter = hurtScreenLength;
+    }
+
+    public void UpdateBlueKey()
+    {
+        hasBlueKey = true;
+        blueKeyCard.gameObject.SetActive(true);
     }
 
     public void FadeFromBlack()

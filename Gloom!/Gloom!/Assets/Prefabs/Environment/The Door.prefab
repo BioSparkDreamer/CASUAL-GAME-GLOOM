@@ -76,6 +76,7 @@ MonoBehaviour:
   colliderObject: {fileID: 5008259364262138331}
   tileObject: {fileID: 6478347951256419241}
   openSpeed: 2
+  requiresKey: 0
 --- !u!1 &5008259363970266956
 GameObject:
   m_ObjectHideFlags: 0

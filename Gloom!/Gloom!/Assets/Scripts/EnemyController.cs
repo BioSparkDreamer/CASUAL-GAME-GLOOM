@@ -6,6 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     [Header("Object Variables")]
     public Rigidbody2D theRB;
+    public SpriteRenderer theSR;
 
     [Header("Chase and Move Variables")]
     private Vector3 playerDirection;
@@ -20,9 +21,28 @@ public class EnemyController : MonoBehaviour
     public GameObject bullet;
     public Transform firePoint;
 
+    [Header("Changing Sprite Variables")]
+    public Color hurtColor;
+    private Color defaultColor;
+    public float timeBetweenColor;
+    [HideInInspector] public float colorCounter;
+
     void Start()
     {
+        defaultColor = theSR.color;
+    }
 
+    void Update()
+    {
+        if (colorCounter > 0)
+        {
+            theSR.color = hurtColor;
+            colorCounter -= Time.deltaTime;
+        }
+        else
+        {
+            theSR.color = defaultColor;
+        }
     }
 
     void FixedUpdate()
@@ -47,6 +67,5 @@ public class EnemyController : MonoBehaviour
         {
             theRB.velocity = Vector2.zero;
         }
-
     }
 }

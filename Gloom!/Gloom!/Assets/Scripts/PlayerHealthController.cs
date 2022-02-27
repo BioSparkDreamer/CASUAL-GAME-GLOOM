@@ -39,11 +39,14 @@ public class PlayerHealthController : MonoBehaviour
         if (currentArmor <= 0)
         {
             currentHealth -= damageToDeal;
+            UIController.instance.EnableHurtScreen();
             AudioManager.instance.PlaySFXAdjusted(5);
 
             if (currentHealth <= 0)
             {
                 currentHealth = 0;
+                PlayerController.instance.GetComponent<CircleCollider2D>().enabled = false;
+                PlayerController.instance.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                 GameOverMenu.instance.OpenGameOverScreen();
             }
 
@@ -52,6 +55,7 @@ public class PlayerHealthController : MonoBehaviour
         else if (currentArmor >= 0)
         {
             currentArmor -= damageToDeal * 2;
+            UIController.instance.EnableHurtScreen();
             AudioManager.instance.PlaySFXAdjusted(5);
 
             if (currentArmor < 0)

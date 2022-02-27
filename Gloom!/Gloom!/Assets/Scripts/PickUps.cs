@@ -12,6 +12,10 @@ public class PickUps : MonoBehaviour
     public int healthAmount = 20;
     public bool isHealth;
 
+    [Header("Armor Pick Up Variables")]
+    public int armorAmount = 20;
+    public bool isArmor;
+
     void Start()
     {
 
@@ -39,6 +43,14 @@ public class PickUps : MonoBehaviour
                 PlayerHealthController.instance.AddHealth(healthAmount);
                 UIController.instance.UpdateHealthUI();
                 AudioManager.instance.PlaySFXAdjusted(4);
+                Destroy(gameObject);
+            }
+
+            if (isArmor && PlayerHealthController.instance.currentArmor < PlayerHealthController.instance.maxArmor)
+            {
+                PlayerHealthController.instance.currentArmor += armorAmount;
+                UIController.instance.UpdateArmorUI();
+                AudioManager.instance.PlaySFXAdjusted(0);
                 Destroy(gameObject);
             }
         }

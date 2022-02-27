@@ -9,6 +9,7 @@ public class Door : MonoBehaviour
     public GameObject colliderObject, tileObject;
     public float openSpeed;
     private bool shouldOpen;
+    public bool requiresKey;
 
     void Start()
     {
@@ -17,24 +18,53 @@ public class Door : MonoBehaviour
 
     void Update()
     {
-        if (shouldOpen && doorModel.position.z != 1f)
+        //If requires a key and has blue key
+        if (requiresKey && UIController.instance.hasBlueKey)
         {
-            doorModel.position = Vector3.MoveTowards(doorModel.position,
-            new Vector3(doorModel.position.x, doorModel.position.y, 1f), openSpeed * Time.deltaTime);
-
-            if (doorModel.position.z == 1f)
+            if (shouldOpen && doorModel.position.z != 1f)
             {
-                colliderObject.SetActive(false);
+                doorModel.position = Vector3.MoveTowards(doorModel.position,
+                new Vector3(doorModel.position.x, doorModel.position.y, 1f), openSpeed * Time.deltaTime);
+
+                if (doorModel.position.z == 1f)
+                {
+                    colliderObject.SetActive(false);
+                }
+            }
+            else if (!shouldOpen && doorModel.position.z != 0)
+            {
+                doorModel.position = Vector3.MoveTowards(doorModel.position, new Vector3(doorModel.position.x,
+                doorModel.position.y, 0f), openSpeed * Time.deltaTime);
+
+                if (doorModel.position.z == 0f)
+                {
+                    colliderObject.SetActive(true);
+                }
             }
         }
-        else if (!shouldOpen && doorModel.position.z != 0)
-        {
-            doorModel.position = Vector3.MoveTowards(doorModel.position, new Vector3(doorModel.position.x,
-            doorModel.position.y, 0f), openSpeed * Time.deltaTime);
 
-            if (doorModel.position.z == 0f)
+        //if it is just a normal door
+        else if (!requiresKey)
+        {
+            if (shouldOpen && doorModel.position.z != 1f)
             {
-                colliderObject.SetActive(true);
+                doorModel.position = Vector3.MoveTowards(doorModel.position,
+                new Vector3(doorModel.position.x, doorModel.position.y, 1f), openSpeed * Time.deltaTime);
+
+                if (doorModel.position.z == 1f)
+                {
+                    colliderObject.SetActive(false);
+                }
+            }
+            else if (!shouldOpen && doorModel.position.z != 0)
+            {
+                doorModel.position = Vector3.MoveTowards(doorModel.position, new Vector3(doorModel.position.x,
+                doorModel.position.y, 0f), openSpeed * Time.deltaTime);
+
+                if (doorModel.position.z == 0f)
+                {
+                    colliderObject.SetActive(true);
+                }
             }
         }
     }

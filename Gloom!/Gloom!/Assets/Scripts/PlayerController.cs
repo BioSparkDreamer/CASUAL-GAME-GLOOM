@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!GameOverMenu.instance.isDead && !PauseMenu.instance.isPaused)
+        if (!GameOverMenu.instance.isDead && !PauseMenu.instance.isPaused && !GameManager.instance.levelEnding)
         {
             Movement();
 
@@ -54,9 +54,13 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!GameOverMenu.instance.isDead && !PauseMenu.instance.isPaused)
+        if (!GameOverMenu.instance.isDead && !PauseMenu.instance.isPaused && !GameManager.instance.levelEnding)
         {
             theRB.velocity = (moveHorizontal + moveVertical) * moveSpeed;
+        }
+        else
+        {
+            theRB.velocity = Vector3.zero;
         }
     }
 
