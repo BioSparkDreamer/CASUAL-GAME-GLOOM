@@ -32,6 +32,7 @@ public class PlayerHealthController : MonoBehaviour
     public void TakeDamage(int damageToDeal)
     {
         currentHealth -= damageToDeal;
+        AudioManager.instance.PlaySFXAdjusted(5);
 
         if (currentHealth <= 0)
         {

@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit))
                 {
-                    Instantiate(bulletEffect, hit.point, Quaternion.identity);
+                    Instantiate(bulletEffect, hit.point + transform.right * (-moveSpeed * Time.deltaTime), Quaternion.identity);
 
                     if (hit.transform.tag == "Enemy")
                     {
@@ -111,6 +111,7 @@ public class PlayerController : MonoBehaviour
 
                 nextTimeCounter = nextTimeToFire;
                 shotGunAnim.SetTrigger("Shoot");
+                AudioManager.instance.PlaySFXAdjusted(3);
                 currentAmmo--;
                 UIController.instance.UpdateAmmoUI();
             }

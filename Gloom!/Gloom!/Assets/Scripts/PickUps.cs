@@ -30,6 +30,7 @@ public class PickUps : MonoBehaviour
             {
                 PlayerController.instance.currentAmmo += ammoAmmount;
                 UIController.instance.UpdateAmmoUI();
+                AudioManager.instance.PlaySFXAdjusted(0);
                 Destroy(gameObject);
             }
 
@@ -37,6 +38,7 @@ public class PickUps : MonoBehaviour
             {
                 PlayerHealthController.instance.AddHealth(healthAmount);
                 UIController.instance.UpdateHealthUI();
+                AudioManager.instance.PlaySFXAdjusted(4);
                 Destroy(gameObject);
             }
         }

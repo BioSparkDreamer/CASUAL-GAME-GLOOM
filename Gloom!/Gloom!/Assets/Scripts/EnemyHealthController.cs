@@ -26,6 +26,7 @@ public class EnemyHealthController : MonoBehaviour
         {
             health = 0;
             Instantiate(deathEffect, transform.position, transform.rotation);
+            AudioManager.instance.PlaySFXAdjusted(1);
             Destroy(gameObject);
         }
     }
