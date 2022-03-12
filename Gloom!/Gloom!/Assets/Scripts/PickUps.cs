@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class PickUps : MonoBehaviour
 {
-    [Header("Ammo Pickup Variables")]
-    public int ammoAmmount = 25;
-    public bool isAmmo;
-
     [Header("Health Pickup Variables")]
     public int healthAmount = 20;
     public bool isHealth;
@@ -15,6 +11,8 @@ public class PickUps : MonoBehaviour
     [Header("Armor Pick Up Variables")]
     public int armorAmount = 20;
     public bool isArmor;
+
+    public bool isCollected;
 
     void Start()
     {
@@ -28,21 +26,14 @@ public class PickUps : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && !isCollected)
         {
-            if (isAmmo)
-            {
-                PlayerController.instance.currentAmmo += ammoAmmount;
-                UIController.instance.UpdateAmmoUI();
-                AudioManager.instance.PlaySFXAdjusted(0);
-                Destroy(gameObject);
-            }
-
             if (isHealth && PlayerHealthController.instance.currentHealth < PlayerHealthController.instance.maxHealth)
             {
                 PlayerHealthController.instance.AddHealth(healthAmount);
                 UIController.instance.UpdateHealthUI();
                 AudioManager.instance.PlaySFXAdjusted(4);
+                isCollected = true;
                 Destroy(gameObject);
             }
 
@@ -51,6 +42,7 @@ public class PickUps : MonoBehaviour
                 PlayerHealthController.instance.currentArmor += armorAmount;
                 UIController.instance.UpdateArmorUI();
                 AudioManager.instance.PlaySFXAdjusted(0);
+                isCollected = true;
                 Destroy(gameObject);
             }
         }

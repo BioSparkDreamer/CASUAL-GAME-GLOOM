@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 97b3ae9aca2fcdd4ab0bbbdb5f9c9a87
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Space Marine
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 39ecf5b78df662e4380b7d018a3c270d, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

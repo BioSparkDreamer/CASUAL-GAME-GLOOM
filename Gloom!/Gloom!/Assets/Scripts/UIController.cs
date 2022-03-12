@@ -17,6 +17,7 @@ public class UIController : MonoBehaviour
     public TMP_Text healthText;
     public TMP_Text ammoText;
     public TMP_Text armorText;
+    public CanvasGroup theHud;
 
     [Header("Hurt Screen Variables")]
     public float hurtScreenLength;
@@ -41,6 +42,9 @@ public class UIController : MonoBehaviour
         UpdateAmmoUI();
         UpdateHealthUI();
         UpdateArmorUI();
+        EnableDisableHud();
+        UpdateXCamera();
+        UpdateYCamera();
     }
 
     void Update()
@@ -80,16 +84,16 @@ public class UIController : MonoBehaviour
 
     public void UpdateHealthUI()
     {
-        healthText.text = PlayerHealthController.instance.currentHealth.ToString() + "%";
+        healthText.text = PlayerHealthController.instance.currentHealth.ToString();
     }
     public void UpdateAmmoUI()
     {
-        ammoText.text = PlayerController.instance.currentAmmo.ToString();
+        ammoText.text = PlayerController.instance.activeGun.currentAmmo.ToString();
     }
 
     public void UpdateArmorUI()
     {
-        armorText.text = PlayerHealthController.instance.currentArmor.ToString() + "%";
+        armorText.text = PlayerHealthController.instance.currentArmor.ToString();
     }
 
     public void EnableHurtScreen()
@@ -113,5 +117,41 @@ public class UIController : MonoBehaviour
     {
         fadeToBlack = true;
         fadeFromBlack = false;
+    }
+
+    public void EnableDisableHud()
+    {
+        if (SettingsController.instance.hudToggle.isOn == true)
+        {
+            theHud.alpha = 1;
+        }
+        else if (SettingsController.instance.hudToggle.isOn == false)
+        {
+            theHud.alpha = 0;
+        }
+    }
+
+    public void UpdateXCamera()
+    {
+        if (SettingsController.instance.xInvertToggle.isOn == true)
+        {
+            PlayerController.instance.invertX = true;
+        }
+        else
+        {
+            PlayerController.instance.invertX = false;
+        }
+    }
+
+    public void UpdateYCamera()
+    {
+        if (SettingsController.instance.yInvertToggle.isOn == true)
+        {
+            PlayerController.instance.invertY = true;
+        }
+        else if (SettingsController.instance.yInvertToggle.isOn == false)
+        {
+            PlayerController.instance.invertY = false;
+        }
     }
 }
