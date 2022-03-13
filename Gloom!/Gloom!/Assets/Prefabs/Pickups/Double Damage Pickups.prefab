@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4247076611438980958
+--- !u!1 &1786300172856123573
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,37 +8,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4247076611438980929}
-  - component: {fileID: 4247076611438980928}
-  - component: {fileID: 2628171262151690568}
+  - component: {fileID: 8404101544157515491}
+  - component: {fileID: 1361500496322893021}
+  - component: {fileID: 1903195599017554664}
   m_Layer: 0
-  m_Name: Blue KeyCard Sprite
+  m_Name: 2x Damage Pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4247076611438980929
+--- !u!4 &8404101544157515491
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4247076611438980958}
+  m_GameObject: {fileID: 1786300172856123573}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4247076613123247998}
+  m_Father: {fileID: 3302259236175612304}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4247076611438980928
+--- !u!212 &1361500496322893021
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4247076611438980958}
+  m_GameObject: {fileID: 1786300172856123573}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -72,31 +72,31 @@ SpriteRenderer:
   m_SortingLayerID: 222061975
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 6393625202743233467, guid: 9f3e55543742f7c42a129e4e84d81643, type: 3}
-  m_Color: {r: 0, g: 0.2313726, b: 1, a: 1}
+  m_Sprite: {fileID: -4907010746686856494, guid: 98f547ef67fee66478f3f3d94f164e79, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.3125, y: 0.40625}
+  m_Size: {x: 0.3125, y: 0.34375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2628171262151690568
+--- !u!114 &1903195599017554664
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4247076611438980958}
+  m_GameObject: {fileID: 1786300172856123573}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f46829a613c830409d081df6133225e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theSR: {fileID: 4247076611438980928}
---- !u!1 &4247076613123247996
+  theSR: {fileID: 1361500496322893021}
+--- !u!1 &7508777281880887136
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,58 +104,64 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4247076613123247998}
-  - component: {fileID: 4247076613123247999}
-  - component: {fileID: 4247076613123247969}
+  - component: {fileID: 3302259236175612304}
+  - component: {fileID: 3797038160582422639}
+  - component: {fileID: 6495853023897696693}
   m_Layer: 0
-  m_Name: Blue Key Holder
+  m_Name: Double Damage Pickups
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4247076613123247998
+--- !u!4 &3302259236175612304
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4247076613123247996}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 7508777281880887136}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.824, y: -5.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4247076611438980929}
+  - {fileID: 8404101544157515491}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &4247076613123247999
+--- !u!58 &3797038160582422639
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4247076613123247996}
+  m_GameObject: {fileID: 7508777281880887136}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.014793634, y: -0.17830998}
+  m_Offset: {x: -0.0040996075, y: 0.027722597}
   serializedVersion: 2
-  m_Radius: 0.24860168
---- !u!114 &4247076613123247969
+  m_Radius: 0.32467246
+--- !u!114 &6495853023897696693
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4247076613123247996}
+  m_GameObject: {fileID: 7508777281880887136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6f0f56b69aa1a44faf4f1c84b373026, type: 3}
+  m_Script: {fileID: 11500000, guid: f8071a1de515618409c3f76221bc6e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBlueKey: 1
-  blueKey: {fileID: 4247076613123247996}
+  healthAmount: 20
+  isHealth: 0
+  armorAmount: 20
+  isArmor: 0
+  isDoubleSpeed: 0
+  isInvincible: 0
+  isDoubleDamage: 1
+  isCollected: 0

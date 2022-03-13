@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Gun : MonoBehaviour
 {
     [Header("Object Variables")]
     public Animator anim;
+    public Image gunImage;
 
     [Header("Gun Variables")]
     public string gunName;
     public int damageAmount;
+    public bool isPistol, isShotgun, isMachineGun;
 
     [Header("Shooting Variables")]
     public float fireRate;
@@ -31,11 +34,5 @@ public class Gun : MonoBehaviour
         {
             fireCounter -= Time.deltaTime;
         }
-    }
-
-    public void UpdateAmmo()
-    {
-        currentAmmo += pickUpAmount;
-        UIController.instance.UpdateAmmoUI();
     }
 }

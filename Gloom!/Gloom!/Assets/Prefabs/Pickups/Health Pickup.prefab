@@ -72,12 +72,12 @@ SpriteRenderer:
   m_SortingLayerID: 222061975
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4d24cfa07556c40408c0a38f88125571, type: 3}
+  m_Sprite: {fileID: -8630923909508717717, guid: 4d24cfa07556c40408c0a38f88125571, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.39, y: 0.28}
+  m_Size: {x: 0.625, y: 0.3125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -157,7 +157,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8071a1de515618409c3f76221bc6e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoAmmount: 0
-  isAmmo: 0
   healthAmount: 20
   isHealth: 1
+  armorAmount: 20
+  isArmor: 0
+  isDoubleSpeed: 0
+  isInvincible: 0
+  isDoubleDamage: 0
+  isCollected: 0

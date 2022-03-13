@@ -12,6 +12,15 @@ public class PickUps : MonoBehaviour
     public int armorAmount = 20;
     public bool isArmor;
 
+    [Header("Double Speed and Damage Pickup Variables")]
+    public bool isDoubleSpeed;
+    public bool isDoubleDamage;
+    public float powerUpSpeed, powerUpLength;
+
+    [Header("Invincibility Variables")]
+    public bool isInvincible;
+    public float invincibleLength;
+
     public bool isCollected;
 
     void Start()
@@ -39,9 +48,31 @@ public class PickUps : MonoBehaviour
 
             if (isArmor && PlayerHealthController.instance.currentArmor < PlayerHealthController.instance.maxArmor)
             {
-                PlayerHealthController.instance.currentArmor += armorAmount;
+                PlayerHealthController.instance.AddArmor(armorAmount);
                 UIController.instance.UpdateArmorUI();
                 AudioManager.instance.PlaySFXAdjusted(0);
+                isCollected = true;
+                Destroy(gameObject);
+            }
+
+            if (isInvincible)
+            {
+                PlayerHealthController.instance.MakeInvincible(invincibleLength);
+                isCollected = true;
+                Destroy(gameObject);
+            }
+
+            if (isDoubleSpeed)
+            {
+                PlayerController.instance.moveSpeed = powerUpSpeed;
+                PlayerController.instance.speedPowerCounter += powerUpLength;
+                isCollected = true;
+                Destroy(gameObject);
+            }
+
+            if (isDoubleDamage)
+            {
+                PlayerController.instance.damagePowerCounter += powerUpLength;
                 isCollected = true;
                 Destroy(gameObject);
             }

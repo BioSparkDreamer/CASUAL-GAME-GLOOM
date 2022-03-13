@@ -6,6 +6,7 @@ public class BillBoard : MonoBehaviour
 {
     [Header("Object Variables")]
     public SpriteRenderer theSR;
+    private Vector3 targetPoint;
 
     void Start()
     {
@@ -15,6 +16,9 @@ public class BillBoard : MonoBehaviour
 
     void Update()
     {
-        transform.LookAt(PlayerController.instance.transform.position, -Vector3.forward);
+        targetPoint = PlayerController.instance.transform.position;
+        targetPoint.z = transform.position.z;
+
+        transform.LookAt(targetPoint, -Vector3.forward);
     }
 }

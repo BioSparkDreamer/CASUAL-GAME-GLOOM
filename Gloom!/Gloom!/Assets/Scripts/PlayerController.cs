@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +18,13 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput, mouseInput;
     private Vector3 moveHorizontal, moveVertical, rotationAmount;
     private float maxAngle = 150, minAngle = 20;
+
+    [Header("Power Up Related Variables")]
+    [HideInInspector] public float speedPowerCounter;
+    [HideInInspector] public bool hasDoubleSpeed;
+    private float speedStore;
+    [HideInInspector] public float damagePowerCounter;
+    [HideInInspector] public bool hasDoubleDamage;
 
     [Header("Option Variables")]
     public float mouseSensitivity = 1;
@@ -50,12 +58,17 @@ public class PlayerController : MonoBehaviour
         //Activate the gun but minus 1 from list we will be adding 1 to the list of guns
         currentGun--;
         SwitchGun();
+
+        //Storing values in variables
+        speedStore = moveSpeed;
     }
 
     void Update()
     {
         if (!GameOverMenu.instance.isDead && !PauseMenu.instance.isPaused && !GameManager.instance.levelEnding)
         {
+            PowerUpCounters();
+
             //Call function for doing movement
             Movement();
 
@@ -83,6 +96,32 @@ public class PlayerController : MonoBehaviour
         else
         {
             theRB.velocity = Vector3.zero;
+        }
+    }
+
+    void PowerUpCounters()
+    {
+        if (speedPowerCounter > 0)
+        {
+            speedPowerCounter -= Time.deltaTime;
+            hasDoubleSpeed = true;
+
+            if (speedPowerCounter <= 0)
+            {
+                moveSpeed = speedStore;
+                hasDoubleSpeed = false;
+            }
+        }
+
+        if (damagePowerCounter > 0)
+        {
+            damagePowerCounter -= Time.deltaTime;
+            hasDoubleDamage = true;
+
+            if (damagePowerCounter <= 0)
+            {
+                hasDoubleDamage = false;
+            }
         }
     }
 
@@ -145,11 +184,19 @@ public class PlayerController : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit))
                 {
-                    Instantiate(bulletEffect, hit.point + transform.right * (-moveSpeed * Time.deltaTime), Quaternion.identity);
+                    Instantiate(bulletEffect, hit.point + transform.right * ((-moveSpeed * 5) * Time.deltaTime), Quaternion.identity);
 
                     if (hit.transform.tag == "Enemy")
                     {
-                        hit.transform.parent.GetComponent<EnemyHealthController>().TakeDamage(activeGun.damageAmount);
+                        if (hasDoubleDamage)
+                        {
+                            hit.transform.parent.GetComponent<EnemyHealthController>().TakeDamage(activeGun.damageAmount * 2);
+                            Debug.Log("Hit with 2X Damage");
+                        }
+                        else
+                        {
+                            hit.transform.parent.GetComponent<EnemyHealthController>().TakeDamage(activeGun.damageAmount);
+                        }
                     }
                 }
                 else
@@ -170,7 +217,7 @@ public class PlayerController : MonoBehaviour
     public void SwitchGun()
     {
         //Deactive current gun
-        activeGun.gameObject.SetActive(false);
+        activeGun.gunImage.enabled = false;
 
         //Activate the next gun
         currentGun++;
@@ -183,7 +230,7 @@ public class PlayerController : MonoBehaviour
 
         //Switch current active gun and set it to true
         activeGun = allGuns[currentGun];
-        activeGun.gameObject.SetActive(true);
+        activeGun.gunImage.enabled = true;
         UIController.instance.UpdateAmmoUI();
     }
 

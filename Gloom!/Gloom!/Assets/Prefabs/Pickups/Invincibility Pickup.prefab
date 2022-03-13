@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4881242912103776380
+--- !u!1 &872688473895590628
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,54 +8,54 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4881242912103776381}
-  - component: {fileID: 4881242912103776378}
-  - component: {fileID: 4881242912103776379}
+  - component: {fileID: 5330885284191493140}
+  - component: {fileID: 5807720174535140843}
+  - component: {fileID: 4471237994434980913}
   m_Layer: 0
-  m_Name: Armor Pickup
+  m_Name: Invincibility Pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4881242912103776381
+--- !u!4 &5330885284191493140
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4881242912103776380}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.285192, y: -5.0410457, z: 0}
+  m_GameObject: {fileID: 872688473895590628}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.311, y: -6.122, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4881242913450511332}
+  - {fileID: 1191691931013700455}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &4881242912103776378
+--- !u!58 &5807720174535140843
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4881242912103776380}
+  m_GameObject: {fileID: 872688473895590628}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0019008517, y: 0.014398545}
+  m_Offset: {x: 0.015726566, y: 0.027722597}
   serializedVersion: 2
-  m_Radius: 0.2804388
---- !u!114 &4881242912103776379
+  m_Radius: 0.34449863
+--- !u!114 &4471237994434980913
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4881242912103776380}
+  m_GameObject: {fileID: 872688473895590628}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8071a1de515618409c3f76221bc6e60, type: 3}
@@ -64,9 +64,12 @@ MonoBehaviour:
   healthAmount: 20
   isHealth: 0
   armorAmount: 20
-  isArmor: 1
+  isArmor: 0
+  isDoubleSpeed: 0
+  isInvincible: 1
+  isDoubleDamage: 0
   isCollected: 0
---- !u!1 &4881242913450511335
+--- !u!1 &8998990470836761905
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,37 +77,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4881242913450511332}
-  - component: {fileID: 4881242913450511333}
-  - component: {fileID: 4881242913450511330}
+  - component: {fileID: 1191691931013700455}
+  - component: {fileID: 8560751150009106777}
+  - component: {fileID: 9097661560487176044}
   m_Layer: 0
-  m_Name: armor
+  m_Name: Invincibility Pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4881242913450511332
+--- !u!4 &1191691931013700455
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4881242913450511335}
+  m_GameObject: {fileID: 8998990470836761905}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4881242912103776381}
+  m_Father: {fileID: 5330885284191493140}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4881242913450511333
+--- !u!212 &8560751150009106777
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4881242913450511335}
+  m_GameObject: {fileID: 8998990470836761905}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -138,7 +141,7 @@ SpriteRenderer:
   m_SortingLayerID: 222061975
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2757887451555568444, guid: a18e5bed1c14dbf48afdb2ac02f7ed87, type: 3}
+  m_Sprite: {fileID: 2118160560421746820, guid: 035d9dfe0c95f0448abec3230ac49655, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -149,16 +152,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4881242913450511330
+--- !u!114 &9097661560487176044
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4881242913450511335}
+  m_GameObject: {fileID: 8998990470836761905}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f46829a613c830409d081df6133225e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theSR: {fileID: 4881242913450511333}
+  theSR: {fileID: 8560751150009106777}

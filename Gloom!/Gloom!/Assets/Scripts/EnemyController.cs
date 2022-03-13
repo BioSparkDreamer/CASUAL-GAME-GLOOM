@@ -10,9 +10,10 @@ public class EnemyController : MonoBehaviour
 
     [Header("Chase and Move Variables")]
     private Vector3 playerDirection;
-    public float playerRange = 10f;
-    public bool shouldChase;
-    public float moveSpeed;
+    public float moveSpeed, returnSpeed;
+    public Vector3 startPoint;
+    public float distanceToStop, rangeToChase;
+    public bool isChasing;
 
     [Header("Shooting Variables")]
     public float fireRate = .5f;
@@ -30,6 +31,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         defaultColor = theSR.color;
+        startPoint = transform.position;
     }
 
     void Update()
@@ -47,25 +49,42 @@ public class EnemyController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) < playerRange)
+        if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToChase)
         {
-            Vector3 playerDirection = PlayerController.instance.transform.position - transform.position;
-            theRB.velocity = playerDirection.normalized * moveSpeed;
+            isChasing = true;
 
-            if (shouldShoot)
+            if (isChasing)
             {
-                shotCounter -= Time.deltaTime;
-                if (shotCounter <= 0)
+                Vector3 playerDirection = PlayerController.instance.transform.position - transform.position;
+
+                if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) < distanceToStop)
                 {
-                    Instantiate(bullet, firePoint.position, firePoint.rotation);
-                    shotCounter = fireRate;
+                    theRB.velocity = Vector2.zero;
+                }
+                else
+                {
+                    theRB.velocity = playerDirection.normalized * moveSpeed;
+                }
+
+                if (shouldShoot)
+                {
+                    shotCounter -= Time.deltaTime;
+                    if (shotCounter <= 0)
+                    {
+                        Instantiate(bullet, firePoint.position, firePoint.rotation);
+                        shotCounter = fireRate;
+                    }
                 }
             }
         }
-
         else
         {
-            theRB.velocity = Vector2.zero;
+            isChasing = false;
+
+            if (isChasing == false)
+            {
+                theRB.velocity = Vector2.zero;
+            }
         }
     }
 }

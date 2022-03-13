@@ -20,13 +20,21 @@ public class UIController : MonoBehaviour
     public CanvasGroup theHud;
 
     [Header("Hurt Screen Variables")]
-    public float hurtScreenLength;
-    private float hurtCounter;
-    public GameObject hurtScreen;
+    public Image hurtScreen;
+    public float hurtAlpha = .25f, hurtFadeSpeed = 2f;
 
     [Header("Key Variables")]
     public bool hasBlueKey;
     public Image blueKeyCard;
+
+    [Header("Objective Variables")]
+    public TMP_Text objectiveText;
+    public Transform blueKeycardDoor;
+    private float distance;
+
+    //Status Text Variables
+    public TMP_Text invincibileStatusText, damageStatusText, speedStatusText,
+    pickUpStatusEffect;
 
     void Awake()
     {
@@ -71,14 +79,62 @@ public class UIController : MonoBehaviour
             }
         }
 
-        if (hurtCounter > 0)
+        //Hurt Screen
+        if (hurtScreen.color.a != 0)
         {
-            hurtCounter -= Time.deltaTime;
-            hurtScreen.SetActive(true);
+            hurtScreen.color = new Color(hurtScreen.color.r, hurtScreen.color.g, hurtScreen.color.b,
+            Mathf.MoveTowards(hurtScreen.color.a, 0f, hurtFadeSpeed * Time.deltaTime));
         }
-        else
+
+        //Count down Invinciblity Duration
+        if (PlayerHealthController.instance.isInvincible)
         {
-            hurtScreen.SetActive(false);
+            invincibileStatusText.gameObject.SetActive(true);
+            invincibileStatusText.text = "Invincibility: " + PlayerHealthController.instance.invincibleCounter.ToString("F0") + " Seconds";
+
+            if (PlayerHealthController.instance.invincibleCounter <= 0.1f && PlayerHealthController.instance.isInvincible)
+            {
+                PlayerHealthController.instance.isInvincible = false;
+                invincibileStatusText.gameObject.SetActive(false);
+            }
+        }
+
+        if (PlayerController.instance.hasDoubleSpeed)
+        {
+            speedStatusText.gameObject.SetActive(true);
+            speedStatusText.text = "2X Speed: " + PlayerController.instance.speedPowerCounter.ToString("F0") + " Seconds";
+
+            if (PlayerController.instance.speedPowerCounter <= 0.1f && PlayerController.instance.hasDoubleSpeed)
+            {
+                speedStatusText.gameObject.SetActive(false);
+            }
+        }
+
+        if (PlayerController.instance.hasDoubleDamage)
+        {
+            damageStatusText.gameObject.SetActive(true);
+            damageStatusText.text = "2X Damage: " + PlayerController.instance.damagePowerCounter.ToString("F0") + " Seconds";
+
+            if (PlayerController.instance.damagePowerCounter <= 0.1f && PlayerController.instance.hasDoubleDamage)
+            {
+                damageStatusText.gameObject.SetActive(false);
+            }
+        }
+
+        ChangingObjectiveText();
+    }
+
+    public void ChangingObjectiveText()
+    {
+
+        if (hasBlueKey == true)
+        {
+            distance = (blueKeycardDoor.transform.position - PlayerController.instance.transform.position).magnitude;
+            objectiveText.text = "Distance to Blue Door: " + distance.ToString("F1") + " meters";
+        }
+        else if (!hasBlueKey)
+        {
+            objectiveText.text = "Find the Blue Keycard!";
         }
     }
 
@@ -98,7 +154,7 @@ public class UIController : MonoBehaviour
 
     public void EnableHurtScreen()
     {
-        hurtCounter = hurtScreenLength;
+        hurtScreen.color = new Color(hurtScreen.color.r, hurtScreen.color.g, hurtScreen.color.b, hurtAlpha);
     }
 
     public void UpdateBlueKey()
@@ -117,6 +173,40 @@ public class UIController : MonoBehaviour
     {
         fadeToBlack = true;
         fadeFromBlack = false;
+    }
+
+    public void ShowPickUpStatus(int amountToAdd, string whatIsPickup)
+    {
+        pickUpStatusEffect.gameObject.SetActive(true);
+
+        if (whatIsPickup == "Health")
+            pickUpStatusEffect.text = "Health Added: +" + amountToAdd.ToString();
+
+        if (whatIsPickup == "Armor")
+            pickUpStatusEffect.text = "Armor Added: +" + amountToAdd.ToString();
+
+        if (whatIsPickup == "Pistol")
+            pickUpStatusEffect.text = "Pistol Ammo: +" + amountToAdd.ToString();
+
+        if (whatIsPickup == "Shotgun")
+            pickUpStatusEffect.text = "Shotgun Ammo: +" + amountToAdd.ToString();
+
+        if (whatIsPickup == "MachineGun")
+            pickUpStatusEffect.text = "Machine Gun Ammo: +" + amountToAdd.ToString();
+
+        if (whatIsPickup == "ShotgunPickup")
+            pickUpStatusEffect.text = "Picked up Shotgun";
+
+        if (whatIsPickup == "MachineGunPickup")
+            pickUpStatusEffect.text = "Picked up Machine Gun";
+
+        StartCoroutine(DissapearTextCo(pickUpStatusEffect));
+    }
+
+    public IEnumerator DissapearTextCo(TMP_Text statusText)
+    {
+        yield return new WaitForSeconds(3.5f);
+        statusText.gameObject.SetActive(false);
     }
 
     public void EnableDisableHud()

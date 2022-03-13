@@ -7,6 +7,7 @@ public class GunPickUp : MonoBehaviour
     [Header("Pick Up Variables")]
     public string gunName;
     private bool isCollected;
+    public string gunPickUpName;
 
     void Start()
     {
@@ -23,6 +24,7 @@ public class GunPickUp : MonoBehaviour
         if (other.tag == "Player" && !isCollected)
         {
             PlayerController.instance.AddGun(gunName);
+            UIController.instance.ShowPickUpStatus(0, gunPickUpName);
             Destroy(gameObject);
             isCollected = true;
         }
