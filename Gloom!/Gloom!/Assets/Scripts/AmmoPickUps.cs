@@ -41,6 +41,7 @@ public class AmmoPickUps : MonoBehaviour
             if (isPistolAmmo)
             {
                 WeaponManager.instance.UpdatePistolAmmo();
+                AudioManager.instance.PlaySFXAdjusted(0);
                 isCollected = true;
                 Destroy(gameObject);
             }
@@ -48,6 +49,7 @@ public class AmmoPickUps : MonoBehaviour
             if (isMachineGunAmmo)
             {
                 WeaponManager.instance.UpdateMachineAmmo();
+                AudioManager.instance.PlaySFXAdjusted(0);
                 isCollected = true;
                 Destroy(gameObject);
             }
@@ -55,6 +57,7 @@ public class AmmoPickUps : MonoBehaviour
             if (isShotgunAmmo)
             {
                 WeaponManager.instance.UpdateShotgunAmmo();
+                AudioManager.instance.PlaySFXAdjusted(0);
                 isCollected = true;
                 Destroy(gameObject);
             }

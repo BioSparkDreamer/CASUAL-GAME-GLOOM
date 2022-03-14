@@ -7,9 +7,9 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
 
     [Header("Audio Source Variables")]
-    public AudioSource levelMusic, mainMenuMusic, pauseMusic;
+    public AudioSource levelMusic, mainMenuMusic, pauseMusic, cutSceneMusic, winMusic;
     public AudioSource[] sfxEffects;
-    public bool isLevel, isMainMenu;
+    public bool isLevel, isMainMenu, isWinMenu, isCutscene;
 
     void Awake()
     {
@@ -29,6 +29,16 @@ public class AudioManager : MonoBehaviour
         if (isMainMenu)
         {
             mainMenuMusic.Play();
+        }
+
+        if (isCutscene)
+        {
+            cutSceneMusic.Play();
+        }
+
+        if (isWinMenu)
+        {
+            winMusic.Play();
         }
     }
 

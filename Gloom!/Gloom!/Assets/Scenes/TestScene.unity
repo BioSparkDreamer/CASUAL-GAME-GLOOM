@@ -3388,7 +3388,7 @@ Transform:
   - {fileID: 21765467}
   - {fileID: 1891060275}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &254101896
 PrefabInstance:
@@ -7904,7 +7904,7 @@ Transform:
   m_Children:
   - {fileID: 766179822}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: -90}
 --- !u!114 &815044148
 MonoBehaviour:
@@ -9853,7 +9853,7 @@ RectTransform:
   - {fileID: 365192995}
   - {fileID: 623854898}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -12161,6 +12161,10 @@ PrefabInstance:
       value: -348.54645
       objectReference: {fileID: 0}
     - target: {fileID: 3994788354189782663, guid: 76630e5b96d460d4eba129ec044c7f45, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 1450394890}
+    - target: {fileID: 3994788354189782663, guid: 76630e5b96d460d4eba129ec044c7f45, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1162209829}
@@ -13413,7 +13417,7 @@ Transform:
   m_Children:
   - {fileID: 1797114121}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1768568989
 Rigidbody2D:

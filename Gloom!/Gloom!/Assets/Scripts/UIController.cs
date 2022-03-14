@@ -23,14 +23,15 @@ public class UIController : MonoBehaviour
     public Image hurtScreen;
     public float hurtAlpha = .25f, hurtFadeSpeed = 2f;
 
-    [Header("Key Variables")]
-    public bool hasBlueKey;
-    public Image blueKeyCard;
-
     [Header("Objective Variables")]
     public TMP_Text objectiveText;
-    public Transform blueKeycardDoor;
+    public Transform blueKeycardDoor, yellowKeyCardDoor, redKeyCardDoor, exitDoor;
     private float distance;
+
+    //Key Variables
+    public bool hasBlueKey, hasYellowKey, hasRedKey;
+    public Image blueKeyCard, yellowKeyCard, redKeyCard;
+    public int currentObjective = 3;
 
     //Status Text Variables
     public TMP_Text invincibileStatusText, damageStatusText, speedStatusText,
@@ -126,15 +127,52 @@ public class UIController : MonoBehaviour
 
     public void ChangingObjectiveText()
     {
+        switch (currentObjective)
+        {
+            case 3:
+                {
+                    if (hasBlueKey)
+                    {
+                        distance = (blueKeycardDoor.transform.position - PlayerController.instance.transform.position).magnitude;
+                        objectiveText.text = "Distance to Blue Door: " + distance.ToString("F1") + " meters";
+                    }
+                    else if (!hasBlueKey)
+                        objectiveText.text = "Find the Blue Keycard!";
 
-        if (hasBlueKey == true)
-        {
-            distance = (blueKeycardDoor.transform.position - PlayerController.instance.transform.position).magnitude;
-            objectiveText.text = "Distance to Blue Door: " + distance.ToString("F1") + " meters";
-        }
-        else if (!hasBlueKey)
-        {
-            objectiveText.text = "Find the Blue Keycard!";
+                    break;
+                }
+
+            case 2:
+                {
+                    if (hasYellowKey)
+                    {
+                        distance = (yellowKeyCardDoor.transform.position - PlayerController.instance.transform.position).magnitude;
+                        objectiveText.text = "Distance to Yellow Door: " + distance.ToString("F1") + " meters";
+                    }
+                    else if (!hasYellowKey)
+                        objectiveText.text = "Find the Yellow Keycard!";
+
+                    break;
+                }
+
+            case 1:
+                {
+                    if (hasRedKey)
+                    {
+                        distance = (redKeyCardDoor.transform.position - PlayerController.instance.transform.position).magnitude;
+                        objectiveText.text = "Distance to Red Door: " + distance.ToString("F1") + " meters";
+                    }
+                    else if (!hasRedKey)
+                        objectiveText.text = "Find the Red Keycard!";
+
+                    break;
+                }
+            case 0:
+                {
+                    distance = (exitDoor.transform.position - PlayerController.instance.transform.position).magnitude;
+                    objectiveText.text = "Distance to Exit: " + distance.ToString("F1") + " meters";
+                    break;
+                }
         }
     }
 
@@ -163,6 +201,18 @@ public class UIController : MonoBehaviour
         blueKeyCard.gameObject.SetActive(true);
     }
 
+    public void UpdateYellowKey()
+    {
+        hasYellowKey = true;
+        yellowKeyCard.gameObject.SetActive(true);
+    }
+
+    public void UpdateRedKey()
+    {
+        hasRedKey = true;
+        redKeyCard.gameObject.SetActive(true);
+    }
+
     public void FadeFromBlack()
     {
         fadeFromBlack = true;
@@ -186,19 +236,19 @@ public class UIController : MonoBehaviour
             pickUpStatusEffect.text = "Armor Added: +" + amountToAdd.ToString();
 
         if (whatIsPickup == "Pistol")
-            pickUpStatusEffect.text = "Pistol Ammo: +" + amountToAdd.ToString();
+            pickUpStatusEffect.text = "Proton .45 Ammo: +" + amountToAdd.ToString();
 
         if (whatIsPickup == "Shotgun")
-            pickUpStatusEffect.text = "Shotgun Ammo: +" + amountToAdd.ToString();
+            pickUpStatusEffect.text = "Ghostbuster-3000 Ammo: +" + amountToAdd.ToString();
 
         if (whatIsPickup == "MachineGun")
-            pickUpStatusEffect.text = "Machine Gun Ammo: +" + amountToAdd.ToString();
+            pickUpStatusEffect.text = "Poltabuster-47 Ammo: +" + amountToAdd.ToString();
 
         if (whatIsPickup == "ShotgunPickup")
-            pickUpStatusEffect.text = "Picked up Shotgun";
+            pickUpStatusEffect.text = "Picked up Ghostbuster-3000 ";
 
         if (whatIsPickup == "MachineGunPickup")
-            pickUpStatusEffect.text = "Picked up Machine Gun";
+            pickUpStatusEffect.text = "Picked up Poltabuster-47 ";
 
         StartCoroutine(DissapearTextCo(pickUpStatusEffect));
     }

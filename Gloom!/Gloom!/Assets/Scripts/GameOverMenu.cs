@@ -13,8 +13,8 @@ public class GameOverMenu : MonoBehaviour
 
     [Header("Game Over Menu Variables")]
     public GameObject[] buttons;
-    public CanvasGroup controlsMenu, optionsMenu, creditsMenu;
-    public GameObject restartButton, gameOverScreen;
+    public CanvasGroup controlsMenu, creditsMenu;
+    public GameObject restartButton, gameOverScreen, hurtScreen;
     public bool isDead;
 
     void Awake()
@@ -43,13 +43,23 @@ public class GameOverMenu : MonoBehaviour
 
     public void OpenGameOverScreen()
     {
+        StartCoroutine(GameOverCo());
+    }
+
+    public IEnumerator GameOverCo()
+    {
         isDead = true;
-        gameOverScreen.SetActive(true);
         PauseMenu.instance.canPause = false;
+
+        yield return new WaitForSeconds(0.2f);
+
+        hurtScreen.SetActive(true);
+
+        yield return new WaitForSeconds(1.2f);
+        gameOverScreen.SetActive(true);
         GameManager.instance.UnLockCursor();
         AudioManager.instance.StopLevelMusic();
         Time.timeScale = 0;
-
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(restartButton);
     }
@@ -70,18 +80,6 @@ public class GameOverMenu : MonoBehaviour
     {
         controlsMenu.alpha = 0;
         controlsMenu.blocksRaycasts = false;
-    }
-
-    public void OpenOptions()
-    {
-        optionsMenu.alpha = 1;
-        optionsMenu.blocksRaycasts = true;
-    }
-
-    public void CloseOptions()
-    {
-        optionsMenu.alpha = 0;
-        optionsMenu.blocksRaycasts = false;
     }
 
     public void OpenCredits()

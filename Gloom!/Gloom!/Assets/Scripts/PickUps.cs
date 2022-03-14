@@ -58,6 +58,7 @@ public class PickUps : MonoBehaviour
             if (isInvincible)
             {
                 PlayerHealthController.instance.MakeInvincible(invincibleLength);
+                AudioManager.instance.PlaySFXAdjusted(0);
                 isCollected = true;
                 Destroy(gameObject);
             }
@@ -66,6 +67,7 @@ public class PickUps : MonoBehaviour
             {
                 PlayerController.instance.moveSpeed = powerUpSpeed;
                 PlayerController.instance.speedPowerCounter += powerUpLength;
+                AudioManager.instance.PlaySFXAdjusted(0);
                 isCollected = true;
                 Destroy(gameObject);
             }
@@ -73,6 +75,7 @@ public class PickUps : MonoBehaviour
             if (isDoubleDamage)
             {
                 PlayerController.instance.damagePowerCounter += powerUpLength;
+                AudioManager.instance.PlaySFXAdjusted(0);
                 isCollected = true;
                 Destroy(gameObject);
             }

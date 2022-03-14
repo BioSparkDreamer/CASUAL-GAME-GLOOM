@@ -59,14 +59,15 @@ public class EnemyController : MonoBehaviour
 
                 if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) < distanceToStop)
                 {
-                    theRB.velocity = Vector2.zero;
+                    if (shouldShoot)
+                        theRB.velocity = Vector2.zero;
                 }
                 else
                 {
                     theRB.velocity = playerDirection.normalized * moveSpeed;
                 }
 
-                if (shouldShoot)
+                if (shouldShoot && !GameOverMenu.instance.isDead)
                 {
                     shotCounter -= Time.deltaTime;
                     if (shotCounter <= 0)

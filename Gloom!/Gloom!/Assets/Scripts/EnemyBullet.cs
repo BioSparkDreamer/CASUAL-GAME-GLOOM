@@ -16,7 +16,7 @@ public class EnemyBullet : MonoBehaviour
     {
         theRB = GetComponent<Rigidbody2D>();
 
-        AudioManager.instance.PlaySFXAdjusted(2);
+        //AudioManager.instance.PlaySFXAdjusted(2);
         playerDirection = PlayerController.instance.transform.position - transform.position;
         playerDirection.Normalize();
         playerDirection = playerDirection * moveSpeed;

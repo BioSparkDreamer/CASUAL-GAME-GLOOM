@@ -25,6 +25,7 @@ public class GunPickUp : MonoBehaviour
         {
             PlayerController.instance.AddGun(gunName);
             UIController.instance.ShowPickUpStatus(0, gunPickUpName);
+            AudioManager.instance.PlaySFX(8);
             Destroy(gameObject);
             isCollected = true;
         }

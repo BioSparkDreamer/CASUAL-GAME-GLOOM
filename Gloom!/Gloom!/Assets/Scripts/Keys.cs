@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Keys : MonoBehaviour
 {
-    [Header("Key Variables")]
-    public bool isBlueKey;
-    public GameObject blueKey;
+    public bool isBlueKey, isRedKey, isYellowKey, isCollected;
 
     void Start()
     {
@@ -20,10 +18,28 @@ public class Keys : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player" && isBlueKey)
+        if (other.tag == "Player" && isBlueKey && !isCollected)
         {
             UIController.instance.UpdateBlueKey();
-            Destroy(blueKey);
+            AudioManager.instance.PlaySFX(9);
+            isCollected = true;
+            Destroy(gameObject);
+        }
+
+        if (other.tag == "Player" && isYellowKey && !isCollected)
+        {
+            UIController.instance.UpdateYellowKey();
+            AudioManager.instance.PlaySFX(9);
+            isCollected = true;
+            Destroy(gameObject);
+        }
+
+        if (other.tag == "Player" && isRedKey && !isCollected)
+        {
+            UIController.instance.UpdateRedKey();
+            AudioManager.instance.PlaySFX(9);
+            isCollected = true;
+            Destroy(gameObject);
         }
     }
 }

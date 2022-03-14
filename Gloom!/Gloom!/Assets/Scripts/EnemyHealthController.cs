@@ -7,11 +7,11 @@ public class EnemyHealthController : MonoBehaviour
     [Header("Health Variables")]
     public int health = 3;
     private EnemyController enemy;
+    public GameObject deathEffect;
 
-    [Header("Dropping Items")]
-    public bool isPurpleGhost;
-    public GameObject blueKey;
+    public GameObject blueKey, redKey, shotGun, machineGun;
     public Transform keyPoint;
+    public bool dropShotgun, dropMachineGun, dropBlueKey, dropRedKey;
 
     void Start()
     {
@@ -33,14 +33,39 @@ public class EnemyHealthController : MonoBehaviour
             health = 0;
             AudioManager.instance.PlaySFXAdjusted(1);
 
-            if (isPurpleGhost)
+            if (dropBlueKey)
             {
                 if (blueKey != null && !UIController.instance.hasBlueKey)
                 {
-                    Instantiate(blueKey, keyPoint.position, Quaternion.identity);
+                    Instantiate(blueKey, keyPoint.position, keyPoint.rotation);
                 }
             }
 
+            if (dropRedKey)
+            {
+                if (redKey != null && !UIController.instance.hasRedKey)
+                {
+                    Instantiate(redKey, keyPoint.position, keyPoint.rotation);
+                }
+            }
+
+            if (dropShotgun)
+            {
+                if (shotGun != null)
+                {
+                    Instantiate(shotGun, keyPoint.position, keyPoint.rotation);
+                }
+            }
+
+            if (dropMachineGun)
+            {
+                if (machineGun != null)
+                {
+                    Instantiate(machineGun, keyPoint.position, keyPoint.rotation);
+                }
+            }
+
+            Instantiate(deathEffect, transform.position + new Vector3(0f, 0f, -0.6f), Quaternion.identity);
             Destroy(gameObject);
         }
     }

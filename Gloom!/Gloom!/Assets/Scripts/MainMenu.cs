@@ -31,6 +31,11 @@ public class MainMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(buttons[buttonToChoose]);
     }
 
+    public void DisableMenu()
+    {
+        mainMenu.gameObject.SetActive(false);
+    }
+
     public void OpenMainMenu()
     {
         startMenu.SetActive(false);

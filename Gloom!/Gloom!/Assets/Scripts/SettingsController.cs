@@ -166,11 +166,15 @@ public class SettingsController : MonoBehaviour
         {
             hudToggle.isOn = false;
         }
+    }
 
+    void Start()
+    {
         //Master Volume Slider
         if (PlayerPrefs.HasKey("MasterVolume"))
         {
             theMixer.SetFloat("MasterVol", PlayerPrefs.GetFloat("MasterVolume"));
+            Debug.Log("Setting Mixer");
             masterSlider.value = PlayerPrefs.GetFloat("MasterVolume");
         }
 
@@ -178,6 +182,7 @@ public class SettingsController : MonoBehaviour
         if (PlayerPrefs.HasKey("MusicVolume"))
         {
             theMixer.SetFloat("MusicVol", PlayerPrefs.GetFloat("MusicVolume"));
+            Debug.Log("Setting Music Mixer");
             musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
         }
 
